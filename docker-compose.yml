@@ -1,0 +1,14 @@
+# Esto es lo que se necesita para montar una base de datos Mongo DB en mi equipo mediante un token
+
+version: '3'
+
+# El nombre de la base de datos
+services:
+  db:
+    container_name: mean-db
+    image: mongo:5.0.16 #Se recomienda colocar la versión de mongo que se va a usar
+    volumes:
+      - ./mongo:/data/db # La imagen de mongo, esa que es versión 5.0.16 graba la base de datos en este directorio. Es la base de datos propiamente de mongo, no el ng, eso es básicamente la data que estamos grabando, es decir, los índices, los documentos, los contenidos y todo lo demás.
+    ports: # Se habilitan los puertos para la comunicación entre el frontend y el backend
+      - 27017:27017 # Mongo db por defecto utiliza el puerto 27017, por lo tanto mapeamos el puerto de mi equipo 27017 con el puerto 27017 del contenedor
+    restart: always # para que cada vez que reinicie la base de datos o docker desktop, ya automáticamente la base de datos esté arriba
